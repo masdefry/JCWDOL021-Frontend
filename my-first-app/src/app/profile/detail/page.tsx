@@ -1,4 +1,5 @@
 import CardProduct from '@/features/profile/detail/components/CardProduct';
+import Link from 'next/link';
 
 export default function DetailPage() {
   return (
@@ -12,6 +13,8 @@ export default function DetailPage() {
           title={'Web Development'}
           paragraph={'Lorem ipsum'}
         />
+
+        <Link href={'/login'}>Go to login page</Link>
       </div>
     </>
   );
