@@ -13,6 +13,8 @@ class LifeCycleMethods extends React.Component<any, any> {
     super(props);
     this.state = {
       counter: 0,
+      string: '', 
+      arrays: []
     };
 
     this.increment = this.increment.bind(this);
