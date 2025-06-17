@@ -36,3 +36,11 @@ export default function UseState() {
 
 
 // axios -> fungsinya untuk apa
+
+
+
+
+
+
+// fetch('jsonplaceholder/posts') ---> HTTP Request 
+// axios ---> HTTP Request ---> Advance > fetch

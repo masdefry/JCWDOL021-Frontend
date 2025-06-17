@@ -4,6 +4,11 @@
       "id": 1,
       "name": "Nobar timnas Indonesia",
       "place": "Cafe"
+    },
+    {
+      "id": 2,
+      "name": "Membeli makan siang",
+      "place": "Kantin"
     }
   ]
 }
