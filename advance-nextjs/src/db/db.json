@@ -9,6 +9,10 @@
       "id": 2,
       "name": "Membeli makan siang",
       "place": "Kantin"
+    },
+    {
+      "id": "0ac8",
+      "name": "Makan malam"
     }
   ]
 }

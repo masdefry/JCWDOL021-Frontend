@@ -1,10 +1,11 @@
 'use client';
 import axios from 'axios';
 import TodoList from './features/home/components/TodoList';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
+  const inputTodo = useRef<HTMLInputElement>(null);
 
   const onGetTodos = async () => {
     try {
@@ -16,14 +17,20 @@ export default function Home() {
     }
   };
 
+  const onPostTodo = async() => {
+    try {
+      await axios.post('http://localhost:3001/todos', {name: inputTodo.current!.value})
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     console.log('componentDidMount Executed!');
     onGetTodos();
   }, []);
 
-  if(todos.length === 0) return (
-    <h1>Loading...</h1>
-  )
+  if (todos.length === 0) return <h1>Loading...</h1>;
 
   return (
     <>
@@ -42,11 +49,15 @@ export default function Home() {
               className='radio'
             />
             <input
-              type='search'
+              ref={inputTodo}
+              type='text'
               className='grow w-full'
               placeholder='Create a new todo'
             />
           </label>
+          <button onClick={onPostTodo} className='btn bg-purple-900 text-white w-full mt-5'>
+            Create Todo
+          </button>
           {/* component todo list */}
           <div className='bg-white rounded-md shadow-md mt-5 p-5'>
             {/* Mapping: Method untuk Me-looping */}
