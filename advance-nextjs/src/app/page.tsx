@@ -1,7 +1,7 @@
 'use client';
 import axios from 'axios';
 import TodoList from './features/home/components/TodoList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -10,14 +10,24 @@ export default function Home() {
     try {
       // GET, POST, PUT, PATCH, DELETE
       const response = await axios.get('http://localhost:3001/todos');
-      setTodos(response.data);
+      setTodos(response.data); // [{}]
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    console.log('componentDidMount Executed!');
+    onGetTodos();
+  }, []);
+
+  if(todos.length === 0) return (
+    <h1>Loading...</h1>
+  )
+
   return (
     <>
+      {console.log('Render')}
       <section
         id='banner'
         className='flex justify-center'
@@ -41,16 +51,14 @@ export default function Home() {
           <div className='bg-white rounded-md shadow-md mt-5 p-5'>
             {/* Mapping: Method untuk Me-looping */}
             {todos?.map((item, index) => {
-              return <TodoList todo={item?.name} />;
+              return (
+                <TodoList
+                  key={index}
+                  todo={item?.name}
+                />
+              );
             })}
           </div>
-
-          <button
-            className='btn bg-purple-300 text-white w-full'
-            onClick={onGetTodos}
-          >
-            Fetch Todos
-          </button>
         </div>
       </section>
     </>
