@@ -1,33 +1,3 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "name": "Nobar timnas Indonesia",
-      "place": "Cafe"
-    },
-    {
-      "id": 2,
-      "name": "Membeli makan siang",
-      "place": "Kantin"
-    },
-    {
-      "id": "0ac8",
-      "name": "Makan malam"
-    },
-    {
-      "id": "5ea3",
-      "name": "Nobar Piala AFF",
-      "place": "Cafe"
-    },
-    {
-      "id": "054b",
-      "name": "Nobar Piala AFF",
-      "place": "Cafe"
-    },
-    {
-      "id": "bfaa",
-      "name": "Nobar Piala AFF",
-      "place": "Cafe"
-    }
-  ]
+  "todos": []
 }

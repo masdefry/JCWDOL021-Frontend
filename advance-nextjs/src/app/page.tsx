@@ -2,10 +2,10 @@
 import axios from 'axios';
 import TodoList from './features/home/components/TodoList';
 import { useEffect, useState, useRef } from 'react';
+import { ITodos } from './features/home/types';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
-  const [idToUpdate, setIdToUpdate] = useState<string>('');
   const inputTodo = useRef<HTMLInputElement>(null);
   const inputPlace = useRef<HTMLInputElement>(null);
 
@@ -32,12 +32,18 @@ export default function Home() {
     }
   };
 
+  const onDeleteTodo = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:3001/todos/${id}`)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     console.log('componentDidMount Executed!');
     onGetTodos();
   }, []);
-
-  if (todos.length === 0) return <h1>Loading...</h1>;
 
   return (
     <>
@@ -76,14 +82,13 @@ export default function Home() {
           {/* component todo list */}
           <div className='bg-white rounded-md shadow-md mt-5 p-5'>
             {/* Mapping: Method untuk Me-looping */}
-            {todos?.map((item, index) => {
+            {todos?.map((todo: ITodos, index) => {
               return (
                 <TodoList
                   key={index}
-                  todo={item?.name}
-                  id={item?.id}
-                  idToUpdate={idToUpdate}
-                  setIdToUpdate={setIdToUpdate}
+                  name={todo?.name}
+                  id={todo?.id}
+                  onDeleteTodo={onDeleteTodo}
                 />
               );
             })}
