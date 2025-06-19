@@ -2,7 +2,7 @@
 import { HiOutlineMail } from 'react-icons/hi';
 import { TbLockPassword } from 'react-icons/tb';
 import { FaRegUserCircle } from 'react-icons/fa';
-import { Field, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerValidationSchema } from '@/features/register/schemas/registerValidationSchema';
 
 export default function RegisterPage() {
@@ -14,10 +14,11 @@ export default function RegisterPage() {
           initialValues={{ username: '', email: '', password: '' }}
           validationSchema={registerValidationSchema}
           onSubmit={(values) => {
-
+            // http request json-server untuk proses register
+            console.log(values)
           }}
         >
-          <form className='w-full flex flex-col gap-3'>
+          <Form className='w-full flex flex-col gap-3'>
             <label className='input input-bordered flex items-center gap-2 rounded-full w-full'>
               <HiOutlineMail />
               <Field
@@ -27,6 +28,7 @@ export default function RegisterPage() {
                 placeholder='Type your email'
               />
             </label>
+            <ErrorMessage name='email' className='text-red-500' component={'div'} />
 
             <label className='input input-bordered flex items-center gap-2 rounded-full w-full'>
               <TbLockPassword />
@@ -37,6 +39,7 @@ export default function RegisterPage() {
                 placeholder='Type your password'
               />
             </label>
+            <ErrorMessage name='password' />
 
             <label className='input input-bordered flex items-center gap-2 rounded-full w-full'>
               <FaRegUserCircle />
@@ -47,8 +50,10 @@ export default function RegisterPage() {
                 placeholder='Type your username'
               />
             </label>
+            <ErrorMessage name='username' />
 
-            <Field as Select
+            <Field
+              as='select'
               name='role'
               className='select select-bordered rounded-full w-full text-gray-300'
             >
@@ -68,7 +73,7 @@ export default function RegisterPage() {
             >
               Register
             </button>
-          </form>
+          </Form>
         </Formik>
       </div>
     </section>
