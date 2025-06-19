@@ -4,18 +4,44 @@ import { TbLockPassword } from 'react-icons/tb';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerValidationSchema } from '@/features/register/schemas/registerValidationSchema';
+import { IUsers } from '@/features/register/types';
+import axios from 'axios';
 
 export default function RegisterPage() {
+  // Parameter hanya 1: (name)
+  // Parameter > 1: ({name, email, password, address, ...})
+  const onRegisterUser = async ({
+    username,
+    email,
+    password,
+    role,
+  }: IUsers) => {
+    try {
+      await axios.post('http://localhost:3000/api/users', {
+        username,
+        email,
+        password,
+        role,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className='flex flex-col items-center py-10'>
       <div className='w-96 flex flex-col items-center gap-3'>
         <h1 className='text-2xl font-bold'>Register User</h1>
         <Formik
-          initialValues={{ username: '', email: '', password: '' }}
+          initialValues={{ username: '', email: '', password: '', role: '' }}
           validationSchema={registerValidationSchema}
           onSubmit={(values) => {
-            // http request json-server untuk proses register
-            console.log(values)
+            onRegisterUser({
+              username: values.username,
+              email: values.email,
+              password: values.password,
+              role: values.role,
+            });
           }}
         >
           <Form className='w-full flex flex-col gap-3'>
@@ -28,7 +54,11 @@ export default function RegisterPage() {
                 placeholder='Type your email'
               />
             </label>
-            <ErrorMessage name='email' className='text-red-500' component={'div'} />
+            <ErrorMessage
+              name='email'
+              className='text-red-500'
+              component={'div'}
+            />
 
             <label className='input input-bordered flex items-center gap-2 rounded-full w-full'>
               <TbLockPassword />
@@ -66,7 +96,7 @@ export default function RegisterPage() {
               <option value='STAFF'>STAFF</option>
               <option value='MANAGER'>MANAGER</option>
             </Field>
-
+            <ErrorMessage name='role' />
             <button
               type='submit'
               className='btn bg-green-700 text-white rounded-full w-full'
