@@ -2,7 +2,7 @@
 const onGetTodos = async () => {
   const response = await fetch('http://localhost:3001/todos', {
     method: 'GET',
-    cache: 'no-store',
+    cache: 'force-cache',
   });
 
   const todos = await response.json();
@@ -12,7 +12,7 @@ const onGetTodos = async () => {
 
 export default async function DataFetchingPage() {
   const todos = await onGetTodos();
-  console.log(todos);
+
   return (
     <>
       <h1>Belajar Data Fetching Strategy</h1>
