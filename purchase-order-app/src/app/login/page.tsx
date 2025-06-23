@@ -6,8 +6,11 @@ import { loginValidationSchema } from '@/features/login/schemas/loginValidationS
 import axios from 'axios';
 import { IUsers } from '@/features/register/types';
 import { toast } from 'react-toastify';
+import { authStore } from '@/store/auth.store';
 
 export default function Page() {
+  const { setAuth } = authStore();
+
   const onAuthenticationUser = async ({
     email,
     password,
@@ -20,7 +23,12 @@ export default function Page() {
           password,
         }
       );
-      console.log(response?.data?.message);
+      console.log(response?.data.user);
+      setAuth({
+        email: response?.data.user?.email,
+        username: response?.data?.user?.username,
+        role: response?.data?.user?.role,
+      });
       toast.success(response?.data?.message);
     } catch (error) {
       console.log(error);
