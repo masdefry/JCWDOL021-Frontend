@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
       {
         message: 'Login success',
         user: {
+          userId: findUser?.docs[0].id,
           username: findUser?.docs[0]?.data().username,
           email: findUser?.docs[0]?.data().email,
           role: findUser?.docs[0]?.data().role,

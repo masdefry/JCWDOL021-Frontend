@@ -23,11 +23,12 @@ export default function Page() {
           password,
         }
       );
-      console.log(response?.data.user);
+    
       setAuth({
         email: response?.data.user?.email,
         username: response?.data?.user?.username,
         role: response?.data?.user?.role,
+        userId: response?.data?.user?.userId
       });
       toast.success(response?.data?.message);
     } catch (error) {
@@ -78,7 +79,7 @@ export default function Page() {
               <ErrorMessage name='password' />
               <button
                 type='submit'
-                className='btn bg-green-700 text-white rounded-full w-full'
+                className='btn bg-green-500 hover:bg-green-600 text-white rounded-full w-full'
               >
                 Login
               </button>
