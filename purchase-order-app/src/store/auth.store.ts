@@ -10,7 +10,7 @@ export type TAuth = {
 
 export interface IAuthStoreStateProps {
   auth: TAuth;
-  setAuth: ({ username, email, role }: TAuth) => void;
+  setAuth: ({ username, email, role, userId }: TAuth) => void;
 }
 
 // Persistance  : Mengsinkronkan antara global state dengan browser storage

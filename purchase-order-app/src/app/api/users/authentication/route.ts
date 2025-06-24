@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { email, password } = await req.json(); // req.json -> req.body
 
     const queryFindUser = query(
       collection(db, 'users'),
@@ -36,3 +36,8 @@ export async function POST(req: NextRequest) {
     console.log(error);
   }
 }
+
+// GET: req.url & req.headers, POST: req.body, req.url, & req.headers, PUT/PATCH: req.body, req.url, & req.headers, DELETE: req.url & req.headers
+// 1. req.body
+// 2. req.url/req.query/req.params
+// 3. req.headers

@@ -4,8 +4,6 @@ import Link from 'next/link';
 
 export default function Navbar() {
   const { auth } = authStore();
-  console.log('NAVBAR');
-  console.log(auth);
 
   return (
     <nav className='bg-green-500 shadow-md'>
