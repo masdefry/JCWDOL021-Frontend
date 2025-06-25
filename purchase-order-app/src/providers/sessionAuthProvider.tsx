@@ -12,9 +12,8 @@ export default function SessionAuthProvider({
 }: ISessionAuthProviderProps) {
   const { userId, setAuth } = authStore();
 
-  const onSessionLoginUser = async () => {
+  const onSessionLoginUser = async (userId: string) => {
     try {
-      console.log('>>>', userId);
       const response = await axios.get(
         `http://localhost:3000/api/users/authentication/${userId}`
       );
@@ -34,7 +33,7 @@ export default function SessionAuthProvider({
   useEffect(() => {
     console.log('useEffect');
     if (userId) {
-      onSessionLoginUser();
+      onSessionLoginUser(userId);
     }
   }, [userId]);
 
