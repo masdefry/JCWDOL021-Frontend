@@ -17,7 +17,6 @@ export default function Page() {
 
   return (
     <>
-      {console.log('Element HTML')}
       <h1>Products Data</h1>
       {products?.map((item, index) => {
         return <p>{item?.name}</p>;
@@ -25,7 +24,5 @@ export default function Page() {
     </>
   );
 }
-
-
 
 // POST (Submit data)
