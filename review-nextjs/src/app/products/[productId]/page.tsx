@@ -1,3 +1,7 @@
+import { generateMetadata } from './metadata';
+
+export { generateMetadata };
+
 export const onGetProductDetailByProductId = async (productId: string) => {
   const response = await fetch(
     `http://localhost:3000/api/products/${productId}`,
@@ -18,7 +22,7 @@ export default async function Page({
   const { productId } = await params;
 
   const product = await onGetProductDetailByProductId(productId);
-  console.log(product);
+
   return (
     <>
       <h1>Product Detail Page</h1>
